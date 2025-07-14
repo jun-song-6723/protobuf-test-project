@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package file_service;
+
+option go_package = "google.golang.org";
+
+message FileReadRequest {
+  string path = 1;
+}
+
+message FileReadResponse {
+  int64 size = 1;
+  string buffer = 2;
+}
+
+message FileWriteRequest {
+  string path = 1;
+  string buffer = 2;
+}
+
+message FileWriteResponse{
+  bool ok = 1;
+}
+
+service FileService {
+  rpc RequestFileRead (FileReadRequest) returns (FileReadResponse) {}
+  rpc RequestFileWrite (FileWriteRequest) returns (FileWriteResponse) {}
+}
+
+
+// go run main.go -file ./files/test_write.txt -mode w -content 'hello from client'
+// go run main.go -file ./files/test_write.txt
+
+/* 
+
+protoc --go_out=. --go_opt=paths=source_relative \
+       --go-grpc_out=. --go-grpc_opt=paths=source_relative \
+       --plugin=protoc-gen-msg=protoc-plugin/protoc-gen-msg \
+       --msg_out=. --msg_opt=paths=source_relative \
+       file.proto
+*/
