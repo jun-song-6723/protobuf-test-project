@@ -9,7 +9,7 @@ Allows a simple server-client interaction where client can read or write content
 To update the content of test_write.txt and read immediately:
 
 ```
-go run main.go -file ./files/test_write.txt -mode w -content 'hello from client' \\
+go run main.go -file ./files/test_write.txt -mode w -content 'hello from client'
 go run main.go -file ./files/test_write.txt
 ```
 ## Plugin
